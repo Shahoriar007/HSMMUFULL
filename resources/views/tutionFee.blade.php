@@ -108,8 +108,10 @@
                                                 <th>Year</th>
                                                 <th>Month</th>
                                                 <th>Status</th>
-                                                <th >Action</th>
-                                                <th>Pay</th>
+                                                <th >Payment Status</th>
+                                                <th >Update Tution Fee</th>
+                                                <th>Print Invoice</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -121,7 +123,7 @@
                                                 <td id="salary_amount">{{$tutionFee->tution_fee}}</td>
                                                 <td id="salary_year">{{$tutionFee->year}}</td>
                                                 <td id="salary_month">{{$tutionFee->month}}</td>
-                                                <td>{{$tutionFee->status}}</td>
+                                                <td id="salary_status">{{$tutionFee->status}}</td>
 
                                                 <td>
                                                 <select name="status" id="status" class="status">
@@ -131,9 +133,9 @@
                                                 </select>
 
                                                 </td>
-                                                <td>
-                                                    <button class="btn btn-success">pay now</button>
-                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                
 
                                             </tr>
 
@@ -150,8 +152,10 @@
                                                 <th>Year</th>
                                                 <th>Month</th>
                                                 <th>Status</th>
-                                                <th >Action</th>
-                                                <th>Pay</th>
+                                                <th >Payment Status</th>
+                                                <th >Update Tution Fee</th>
+                                                <th >Print Invoice</th>
+                                                
                                             </tr>
 
                                         </tfoot>
@@ -283,7 +287,10 @@
             url:"{{route('updateTutionStatus')}}",
             data: {id:id,status:status,amount:amount,year:year,month:month},
             success:function(data){
-                console.log(data.account);
+
+                var newStatus = $select.parent().siblings("td#salary_status").text(data.status);
+
+                console.log(data.status);
           }
        });
         

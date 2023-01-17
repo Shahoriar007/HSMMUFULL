@@ -14,7 +14,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $account = array();
+        $account = Account::all();
         return view('accountStatus', compact('account'));
     }
 

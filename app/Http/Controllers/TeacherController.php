@@ -28,70 +28,40 @@ class TeacherController extends Controller
         return view('our_team', compact('principal','quranic_female','quranic_male','academic_male','academic_female','assistantTeachers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    // Class Teacher Set Page View
+    public function viewClassTeacherSet()
     {
-        //
+        $classTeacher = Teacher::where('classTeacherClass','!=','0')->get();
+
+        return view('admin.adminSection.classTeacherSet', compact('classTeacher'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    // Class Teracher Set post
+    public function viewClassTeacherPost(Request $request)
     {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Teacher  $teacher
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Teacher $teacher)
-    {
-        //
-    }
+        $classTeacher = Teacher::where('teacherId','=',$request->teacherId);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Teacher  $teacher
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Teacher $teacher)
-    {
-        //
-    }
+        $classTeacher->update([
+            'classTeacherClass' => $request->classTeacherClass,
+            'classTeacherSection' => $request->classTeacherSection,
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Teacher  $teacher
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Teacher $teacher)
-    {
-        //
+        return redirect()->route('classTeacherSet');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Teacher  $teacher
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Teacher $teacher)
+    
+    // Class teacher set page delete
+    public function classTeacherDelete($teacherId)
     {
-        //
+
+        $classTeacher = Teacher::where('teacherId','=',$teacherId);
+
+        $classTeacher->update([
+            'classTeacherClass' => "0",
+            'classTeacherSection' => "0",
+        ]);
+
+        return redirect()->route('classTeacherSet');
     }
 
 

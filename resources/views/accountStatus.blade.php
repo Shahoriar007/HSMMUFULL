@@ -14,7 +14,7 @@
 
                         </div>
 
-                        <div class="card card-bordered">
+                        <!-- <div class="card card-bordered">
                             <div class="card-inner">
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -64,7 +64,7 @@
                                 </div>
                             
 
-                            </div>
+                            </div> -->
 
                         </div><!-- card -->
                         <div class="card card-bordered">
@@ -78,27 +78,23 @@
                                                 <th>Month</th>
                                                 <th>Tution Fees</th>
                                                 <th>Teacher Salaries</th>
-                                                <th>Staff Salaries</th>
-                                                <th>Electricity</th>
-                                                <th>Water</th>
+                                               
                                                 <th>Balance</th>
                                             </thead>
                                             <tbody>
-                                                @if(count($account) >0)
+                                                @foreach($account as $account)
+                                                
                                                 <tr>
-                                                <td>{{$account[0]->id}}</td>
-                                                <td>{{$account[0]->year}}</td>
-                                                <td>{{$account[0]->month}}</td>
-                                                <td>{{$account[0]->total_tution_fees}}</td>
-                                                <td>{{$account[0]->total_salaries}}</td>
-                                                <td>{{$account[0]->staff_salaries}}</td>
-                                               
-                                                <td>{{$account[0]->electricity_bill}}</td>
-                                                <td>{{$account[0]->water_bill}}</td>
-                                                <td>{{$account[0]->total_tution_fees - $account[0]->total_salaries}}</td>
+                                                <td>{{$account->id}}</td>
+                                                <td>{{$account->year}}</td>
+                                                <td>{{$account->month}}</td>
+                                                <td>{{$account->total_tution_fees}}</td>
+                                                <td>{{$account->total_salaries}}</td>
+                                                
+                                                <td>{{$account->total_tution_fees - $account->total_salaries}}</td>
                                                 
                                                 </tr>
-                                                @endif
+                                                @endforeach
                                             </tbody>
 
                                         </table>

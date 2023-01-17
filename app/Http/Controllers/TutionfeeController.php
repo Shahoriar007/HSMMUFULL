@@ -126,10 +126,10 @@ class TutionfeeController extends Controller
             Account::where('year',"=",$year)->where('month',"=",$month)->update([
                 'total_tution_fees' => $total_tution_fees,
             ]);
-            return response()->json(['account'=>json_encode($total_tution_fees)]);
+            return response()->json(['status'=>$status]);
             
          }
-        return response()->json(['ji'=>'hiiiiiiiiiiiiiiiiiiii']);
+        return response()->json(['status'=>$status]);
         
     }
 }

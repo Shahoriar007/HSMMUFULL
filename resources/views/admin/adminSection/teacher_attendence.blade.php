@@ -26,11 +26,20 @@
 
                                     <div class="row">
 
-                                        <div class="form-group col-md-2">
-                                            <label for="labelName">Date</label>
-                                            <input type="date" id="todayDate" name="todayDate" class="form-control"
-                                                required>
-                                        </div>
+                                    @php 
+
+                                    date_default_timezone_set('Asia/Dhaka');
+                                    $date = date('y-m-d');
+
+                                    $time = date('h:i:sa');
+
+                                    @endphp
+
+                                        <h4>Intime:</h4>
+                                        
+                                        <input type="text" id="todayDate" name="todayDate" value="{{$date}}" class="form-control"
+                                            hidden>
+                                        
 
                                         <div class="form-group col-md-4">
                                             <label for="labelName">Teacher Id</label>
@@ -38,10 +47,9 @@
                                                 required>
                                         </div>
 
-                                        <div class="form-group col-md-2">
-                                            <label for="labelName">In Time</label>
-                                            <input type="time" id="inTime" name="inTime" class="form-control" required>
-                                        </div>
+                                        
+                                        <input type="text" id="inTime" name="inTime"  value="{{$time}}" class="form-control" hidden>
+                                      
 
 
 
@@ -62,11 +70,11 @@
 
                                     <div class="row">
 
-                                        <div class="form-group col-md-2">
-                                            <label for="labelName">Date</label>
-                                            <input type="date" id="todayDate" name="todayDate" class="form-control"
-                                                required>
-                                        </div>
+                                    <h4>Outtime:</h4>
+
+                                        <input type="text" id="todayDate" name="todayDate" value="{{$date}}" class="form-control"
+                                                hidden>
+                                        
 
                                         <div class="form-group col-md-4">
                                             <label for="labelName">Teacher Id</label>
@@ -74,10 +82,9 @@
                                                 required>
                                         </div>
 
-                                        <div class="form-group col-md-2">
-                                            <label for="labelName">Out Time</label>
-                                            <input type="time" id="outTime" name="outTime" class="form-control" required>
-                                        </div>
+                                    
+                                        <input type="text" id="outTime" name="outTime" value="{{$time}}" class="form-control" hidden>
+                                        
 
 
 

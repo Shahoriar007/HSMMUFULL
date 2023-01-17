@@ -24,6 +24,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\TeacherAttendenceController;
 use App\Http\Controllers\StudentAttendenceController;
+use App\Http\Controllers\StudentTutionFees;
 
 use App\Models\Teacherapplicationform;
 use App\Models\TeacherApplications;
@@ -90,7 +91,7 @@ Route::post('/career', [TeacherApplicationController::class, 'create'])->name('t
 //our team
 Route::get('/our-team',[TeacherController::class,'index'])->name('ourTeam');
 
-Route::post('/dashboard/password', [UserController::class, 'changePassword'] )->middleware(['auth'])->name('changePassword');
+
 
 
 
@@ -114,11 +115,15 @@ Route::get('/contact', function () {
 })->name('contact');
 
 
-
-
-
-
+// Student Dashboard
 Route::get('/dashboard', [UserController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+// Student Tution Fees
+Route::get('/tutionFees', [StudentTutionFees::class,'index'])->middleware(['auth', 'verified'])->name('studentTuitionFees');
+
+// Student Change Password
+Route::get('/studentPasswordUpdate', [UserController::class, 'changePasswordView'] )->middleware(['auth'])->name('changePasswordStudent');
+Route::post('/studentPasswordUpdate', [UserController::class, 'changePasswordform'] )->middleware(['auth'])->name('changePasswordPost');
 
 require __DIR__.'/auth.php';
 
@@ -233,6 +238,11 @@ Route::get('/teacher/attendence', [TeacherAttendenceController::class, 'index'])
 Route::post('/teacher/attendence', [TeacherAttendenceController::class, 'store'])->middleware(['auth:admin', 'verified'])->name('teacherAttendencePost');
 Route::post('/teacher/attendence/update', [TeacherAttendenceController::class, 'update'])->middleware(['auth:admin', 'verified'])->name('teacherAttendenceUpdate');
 
+// Class Teacher set
+Route::get('/classTeacherSet', [TeacherController::class, 'viewClassTeacherSet'])->middleware(['auth:admin', 'verified'])->name('classTeacherSet');
+Route::post('/classTeacherSet', [TeacherController::class, 'viewClassTeacherPost'])->middleware(['auth:admin', 'verified'])->name('classTeacherSetSubmit');
+Route::get('/classTeacherSet/delete/{teacherId}', [TeacherController::class, 'classTeacherDelete'])->middleware(['auth:admin', 'verified']);
+
 // Class Teacher Set
 //Route::get('/teacher/attendence', [TeacherAttendenceController::class, 'index'])->middleware(['auth:admin', 'verified'])->name('classTeacherSet');
 
@@ -262,7 +272,9 @@ Route::prefix('teacher')->group(function(){
     Route::post('/password/change', [TeacherController::class, 'changePassword'] )->middleware(['auth:teacher', 'verified'])->name('changeTeacherPassword');
 
     // Teacher -> student attendence
-    Route::get('/attendence', [StudentAttendenceController::class, 'index'] )->middleware(['auth:teacher', 'verified']);
+    Route::get('/attendence/{class}/{section}', [StudentAttendenceController::class, 'index'] )->middleware(['auth:teacher', 'verified']);
+
+    Route::post('/attendence', [StudentAttendenceController::class, 'store'] )->middleware(['auth:teacher', 'verified'])->name('studentAttendence');
 
 
 

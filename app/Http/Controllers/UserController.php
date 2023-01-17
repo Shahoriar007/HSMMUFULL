@@ -12,14 +12,15 @@ use Illuminate\Support\Str;
 class UserController extends Controller
 {
     public function index(){
-        $id = Auth::guard('web')->user()->id;
-        $studentId = 'stu'.$id;
-        $tution_fees = Tutionfee::where('studentId',$studentId)->get();
-        
-        return view('dashboard',compact('tution_fees'));
+        return view('dashboard');
     }
 
-    public function changePassword(Request $request){
+    public function changePasswordView(){
+        return view('studentChangePassword');
+    }
+
+
+    public function changePasswordform(Request $request){
         $input = $request->all();
         $current_pwd = $input['password'];
         $new_pwd = $input['new-password'];
