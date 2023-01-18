@@ -20,7 +20,8 @@
                                     <h5 class="card-title">Tution Fee</h5>
                                 </div>
 
-                                <form class="gy-3" enctype="multipart/form-data" method="POST" action="{{route('tutionFeeGenerate')}}">
+                                <form class="gy-3" enctype="multipart/form-data" method="POST"
+                                    action="{{route('tutionFeeGenerate')}}">
                                     @csrf
 
                                     <div class="row g-3 align-center">
@@ -93,6 +94,8 @@
                             </div>
 
                         </div><!-- card -->
+
+
                         <div class="card card-bordered">
                             <div class="card-inner">
                                 <div class="card-head">
@@ -102,16 +105,16 @@
                                     <table id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th >Id</th>
-                                                <th >Student Id</th>
+                                                <th>Id</th>
+                                                <th>Student Id</th>
                                                 <th>Tution fee</th>
                                                 <th>Year</th>
                                                 <th>Month</th>
                                                 <th>Status</th>
-                                                <th >Payment Status</th>
-                                                <th >Update Tution Fee</th>
+                                                <th>Payment Status</th>
+                                                <th>Update Tution Fee</th>
                                                 <th>Print Invoice</th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -126,16 +129,72 @@
                                                 <td id="salary_status">{{$tutionFee->status}}</td>
 
                                                 <td>
-                                                <select name="status" id="status" class="status">
-                                                       
+                                                    <select name="status" id="status" class="status">
+
                                                         <option value="pending">pending</option>
                                                         <option value="paid">paid</option>
-                                                </select>
+                                                    </select>
 
                                                 </td>
-                                                <td></td>
-                                                <td></td>
-                                                
+                                                <!-- <td>
+                                                    <a href="{{ url('/admin/tution/fee/update')}}/{{$tutionFee->studentId}}"><i class="fas fa-edit" aria-hidden="true">Update </i></a>
+                                                </td> -->
+                                                <td>
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target="{{'#update_product'}}">
+                                                        Update
+                                                    </button>
+
+                                                    <div class="modal fade" id="update_product" tabindex="-1"
+                                                        role="dialog" aria-labelledby="update_product_lebel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="update_product_lebel">
+                                                                        Update Fee</h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+
+                                                                <form method="POST" action="{{url('/admin/tution/fee/update')}}/{{$tutionFee->studentId}}/{{$tutionFee->id}}" enctype="multipart/form-data">
+                                                                    @csrf
+
+                                                                    <div class="modal-body ">
+
+                                                                        <div class="row">
+                                                                            <div class="">
+
+                                                                                <label for="tution_fee">New
+                                                                                    Fees</label><br>
+                                                                                <input type="text" name="tution_fee"
+                                                                                    id="tution_fee" ></br>
+
+                                                                            </div>
+                                                                            <br>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-dismiss="modal">Close</button>
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary btn-update-product">Save
+                                                                            changes</button>
+                                                                    </div>
+
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a href=""><i class="fas fa-print" aria-hidden="true">Print</i></a>
+                                                </td>
+
 
                                             </tr>
 
@@ -146,16 +205,16 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th >Id</th>
-                                                <th >Student Id</th>
-                                                <th >Tution fee</th>
+                                                <th>Id</th>
+                                                <th>Student Id</th>
+                                                <th>Tution fee</th>
                                                 <th>Year</th>
                                                 <th>Month</th>
                                                 <th>Status</th>
-                                                <th >Payment Status</th>
-                                                <th >Update Tution Fee</th>
-                                                <th >Print Invoice</th>
-                                                
+                                                <th>Payment Status</th>
+                                                <th>Update Tution Fee</th>
+                                                <th>Print Invoice</th>
+
                                             </tr>
 
                                         </tfoot>
@@ -183,22 +242,20 @@
 
 
 <!-- content @e -->
-
-<script src="{{ asset('adminFrontend/assets/js/jquery-3.6.0.min.js')}}"></script>
-<!--=====popper js=====-->
-<script src="{{ asset('adminFrontend/assets/js/popper.min.js')}}"></script>
-<!--=====bootstrap=====-->
-<script src="{{ asset('adminFrontend/assets/js/bootstrap.min.js')}}"></script>
-<!--=====Owl carousel=====-->
-<script src="{{ asset('adminFrontend/assets/js/owl.carousel.min.js')}}"></script>
-<!--=====header script=====-->
-<script src="{{ asset('adminFrontend/assets/js/script.js')}}"></script>
-<!--=====header script=====-->
-<script src="{{ asset('adminFrontend/assets/js/main.js')}}"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+</script>
 
 
-    
+
+
+
 
 <script type="text/Javascript">
 

@@ -433,7 +433,7 @@
                             <div class="row">
                                
                                 <div class="col-lg-12 text-center add-button">
-                                    <input type="submit" class="bg-danger" value="Apply Now">
+                                    <input type="submit" class="bg-danger" value="Update">
                                 </div>
                             </div>
                             <!--verification info end-->

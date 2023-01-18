@@ -28,7 +28,7 @@
                     <div class="event-item-box">
                         <div class="row">
                             <!--Events part Start-->
-                            <div class="col-lg-8">
+                            <div class="col-lg-12">
                                 <div class="row">
                                     <!-- Single Item -->
                                     <div class="col-lg-12 col-md-6 single-item">
@@ -119,9 +119,9 @@
                             <!--Events part end-->
 
                             <!-------sidebar------->
-                            <div class="col-lg-4">
+                            <!-- <div class="col-lg-4">
                                 <div class="row">
-                                    <!--Events sidebar start-->
+                                   
                                     <div class="col-lg-12 col-md-6">
                                         <div class="box-heading link-item">
                                             <h2>Top Magazine Post</h2>
@@ -147,9 +147,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!--Events sidebar end-->
+                                  
                                 </div>
-                            </div>
+                            </div> -->
 
                         </div>
 
@@ -158,11 +158,11 @@
                             <div class="col-md-12 pagi-area text-center">
                                 <nav aria-label="navigation">
                                     <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-double-left"></i></a></li>
+                                        <!-- <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-double-left"></i></a></li>
                                         <li class="page-item active"><a class="page-link" href="#">1</a></li>
                                         <li class="page-item"><a class="page-link" href="#">2</a></li>
                                         <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-double-right"></i></a></li>
+                                        <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-double-right"></i></a></li> -->
                                     </ul>
                                 </nav>
                             </div>

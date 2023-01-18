@@ -14,9 +14,9 @@ class TeacherApplicationController extends Controller
     public function index(Request $request){
         return view('teacherApplication');
     }
+
     public function create(Request $request)
     {
-
         //  Image name genarate, resize and save in a folder
         $image = $request->file('photo');
         $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
@@ -66,7 +66,7 @@ class TeacherApplicationController extends Controller
 
     }
     public function show(){
-        $teacherApplications = Teacherapplications::all();
+        $teacherApplications = Teacherapplications::paginate(5);
         return view('admin.adminSection.teacher_applications', compact('teacherApplications'));
     }
     public function applicationDetail($id){

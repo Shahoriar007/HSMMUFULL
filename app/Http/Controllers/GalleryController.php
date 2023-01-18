@@ -106,7 +106,7 @@ class GalleryController extends Controller
         //
     }
     public function viewPhotos(){
-        $photos = Gallery::all();
+        $photos = Gallery::paginate(9);
         return view('gallery', compact('photos'));
     }
 }

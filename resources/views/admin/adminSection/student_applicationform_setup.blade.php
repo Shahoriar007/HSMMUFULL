@@ -75,6 +75,9 @@
                     <tbody>
                       @if($formfields)
                       @foreach($formfields as $field)
+
+                      @if($field->labelName != null)
+
                       <tr>
                         <td>{{$field->id}}</td>
                         <td>{{$field->relatedField}}</td>
@@ -131,6 +134,9 @@
                           </div>
                         </td>
                       </tr>
+
+
+                      @endif
                       @endforeach
                       @endif
                     </tbody>

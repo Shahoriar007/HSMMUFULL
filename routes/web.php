@@ -225,6 +225,9 @@ Route::post('/teacher/application/approve/{id}', [TeacherApplicationController::
 
 Route::get('/tution/fee', [TutionfeeController::class, 'index'])->middleware(['auth:admin', 'verified'])->name('tutionFee');
 Route::post('/tution/fee', [TutionfeeController::class, 'create'])->middleware(['auth:admin', 'verified'])->name('tutionFeeGenerate');
+// Tution Fee Update
+Route::post('/tution/fee/update/{studentId}/{id}', [TutionfeeController::class, 'update'])->middleware(['auth:admin', 'verified'])->name('tution_fee_update');
+
 Route::get('/teacher/salary', [SalaryController::class, 'index'])->middleware(['auth:admin', 'verified'])->name('teacherSalary');
 Route::post('/teacher/salary', [SalaryController::class, 'create'])->middleware(['auth:admin', 'verified'])->name('teacherSalaryGenerate');
 Route::post('/status/tution', [TutionfeeController::class, 'updateTutionStatus'])->middleware(['auth:admin', 'verified'])->name('updateTutionStatus');

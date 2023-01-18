@@ -1,41 +1,7 @@
 @extends('masterAdmin')
 @section('onlineApplications')
 
-
-
-
 <head>
-<style>
-/* table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-} */
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-  border: 1px solid #ddd;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
-th, td {
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even){background-color: #f2f2f2}
-</style>
-
 
 </head>
 <body>
@@ -50,17 +16,21 @@ tr:nth-child(even){background-color: #f2f2f2}
 
 
 <div style="overflow-x:auto;">
-<table >
-  <tr>
-    <th>Id</th>
-    <th>Student Name</th>
-    <th>Want to Admitted in</th>
-    <th>Father Name</th>
-    <th>Father Phone</th>
-    <th>Current Address</th>
+<table id="example" class="display" style="width:100%">
 
-    <th colspan="2" class="text-center">Action</th>
-  </tr>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Student Name</th>
+      <th>Want to Admitted in</th>
+      <th>Father Name</th>
+      <th>Father Phone</th>
+      <th>Current Address</th>
+      <th >Action</th>
+    </tr>
+  </thead>
+    
+<tbody>
 
 @foreach($onlineAdmInfo as $info)
     <tr>
@@ -76,74 +46,132 @@ tr:nth-child(even){background-color: #f2f2f2}
             <a href="{{url('/admin/online_applications')}}/{{$info->id}}">
                 <button type="button" class="btn btn-primary">Details</button>
             </a>
-        </td>
 
-        <!-- Approve Button -->
+            @if($info->status==1)
 
-        @if($info->status==1)
-
-        <td>
+        
             <a href="{{url('/admin/online_applications_approve')}}/{{$info->id}}">
                 <button type="button" class="btn btn-success">Approved</button>
             </a>
-        </td>
+        
 
         @elseif($info->status==0)
 
-        <td>
+        
             <a href="{{url('/admin/online_applications_approve')}}/{{$info->id}}">
                 <button type="button" class="btn btn-danger">Unapproved</button>
             </a>
-        </td>
+       
 
         @endif
+
+
+        </td>
+
+    
+
         
-        <!-- <td>
-            <select name="status" id="status" class="btn btn-success status">
-
-                
-
-                <option data-display="">
-                  <a href="{{url('/admin/online_applications')}}/{{$info->id}}" >
-                      <button type="button" class="btn btn-primary">Details</button>
-                  </a>
-                </option>
-
-                <option data-display="">
-                  <a href="" >
-                    <button type="button" class="btn btn-primary">Approve</button>
-                  </a>
-                </option>
-                
-            </select>
-        </td> -->
-
+       
     </tr>
 @endforeach
 
+</tbody>
+
+<tfoot>
+<tr>
+      <th>Id</th>
+      <th>Student Name</th>
+      <th>Want to Admitted in</th>
+      <th>Father Name</th>
+      <th>Father Phone</th>
+      <th>Current Address</th>
+      <th >Action</th>
+    </tr>
+</tfoot>
 </table>
 
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button> -->
-
-
-
-<!-- Pagination -->
-<br>
-<br>
-<div class="row justify-content-md-center">
-  <div class="col-md-auto">
-  
-  </div> 
-</div>
-<br>
-<br>
 
 </div>
 
 </body>
 
+<script src="{{ asset('adminFrontend/assets/js/jquery-3.6.0.min.js')}}"></script>
+<!--=====popper js=====-->
+<script src="{{ asset('adminFrontend/assets/js/popper.min.js')}}"></script>
+<!--=====bootstrap=====-->
+<script src="{{ asset('adminFrontend/assets/js/bootstrap.min.js')}}"></script>
+
+<!--=====header script=====-->
+<script src="{{ asset('adminFrontend/assets/js/script.js')}}"></script>
+<!--=====header script=====-->
+<script src="{{ asset('adminFrontend/assets/js/main.js')}}"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script type="text/Javascript">
+
+    $(document).ready(function () {
+        
+    // Setup - add a text input to each footer cell
+    $('#example thead tr')
+        .clone(true)
+        .addClass('filters')
+        .appendTo('#example thead');
+ 
+    var table = $('#example').DataTable({
+        orderCellsTop: true,
+        fixedHeader: true,
+        initComplete: function () {
+            var api = this.api();
+ 
+            // For each column
+            api
+                .columns()
+                .eq(0)
+                .each(function (colIdx) {
+                    // Set the header cell to contain the input element
+                    var cell = $('.filters th').eq(
+                        $(api.column(colIdx).header()).index()
+                    );
+                    var title = $(cell).text();
+                    $(cell).html('<input type="text" placeholder="' + title + '" />');
+ 
+                    // On every keypress in this input
+                    $(
+                        'input',
+                        $('.filters th').eq($(api.column(colIdx).header()).index())
+                    )
+                        .off('keyup change')
+                        .on('change', function (e) {
+                            // Get the search value
+                            $(this).attr('title', $(this).val());
+                            var regexr = '({search})'; //$(this).parents('th').find('select').val();
+ 
+                            var cursorPosition = this.selectionStart;
+                            // Search the column for that value
+                            api
+                                .column(colIdx)
+                                .search(
+                                    this.value != ''
+                                        ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                        : '',
+                                    this.value != '',
+                                    this.value == ''
+                                )
+                                .draw();
+                        })
+                        .on('keyup', function (e) {
+                            e.stopPropagation();
+ 
+                            $(this).trigger('change');
+                            $(this)
+                                .focus()[0]
+                                .setSelectionRange(cursorPosition, cursorPosition);
+                        });
+                });
+        },
+    });
+});
+   
+</script>
 
 @endsection

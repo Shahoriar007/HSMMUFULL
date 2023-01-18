@@ -1,8 +1,6 @@
 @extends('masterAdmin')
 @section('teacherApplicationForm')
 
-
-
 <!-- content @s -->
 <div class="nk-content ">
   <div class="container-fluid">
@@ -74,6 +72,9 @@
                     <tbody>
                       @if($formfields)
                       @foreach($formfields as $field)
+
+                      @if($field->lebelName != null)
+
                       <tr>
                         <td>{{$field->id}}</td>
                         <td>{{$field->relatedField}}</td>
@@ -130,6 +131,8 @@
                           </div>
                         </td>
                       </tr>
+
+                      @endif
                       @endforeach
                       @endif
                     </tbody>

@@ -89,21 +89,7 @@
                                         </tbody>
                                     </table>
 
-                                    <!-- <form method="POST" action="" enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="row">
-                                            <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                <label for="input-pass">Current Password <span class="required-f">*</span></label>
-                                                <input name="password" id="input-pass" type="password" required>
-                                            </div>
-                                            <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                <label for="input-newpass">New Password <span class="required-f">*</span></label>
-                                                <input name="new-password" id="input-newpass" type="password" required>
-                                            </div>
-
-                                        </div>
-                                        <button class="btn btn-primary" type="submit">Save Change</button>
-                                    </form> -->
+                                    
                                 </div>
                             </div>
                         </div>
@@ -113,6 +99,7 @@
         </div>
     </div>
 </div>
+
 
 
 <script src="{{ asset('assets/js/jquery-3.6.0.min.js')}}"></script>

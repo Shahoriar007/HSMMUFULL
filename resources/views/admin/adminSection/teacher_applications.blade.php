@@ -116,7 +116,9 @@
   Launch demo modal
 </button> -->
 
-
+<div >
+{{ $teacherApplications->links() }}
+</div>
 
        
 

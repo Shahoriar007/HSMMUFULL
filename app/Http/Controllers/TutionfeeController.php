@@ -55,61 +55,7 @@ class TutionfeeController extends Controller
         return redirect()->route('tutionFee');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Tutionfee  $tutionfee
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Tutionfee $tutionfee)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Tutionfee  $tutionfee
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Tutionfee $tutionfee)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tutionfee  $tutionfee
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Tutionfee $tutionfee)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Tutionfee  $tutionfee
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Tutionfee $tutionfee)
-    {
-        //
-    }
     public function updateTutionStatus(Request $request){
         $id = $request->get('id');
         $status = $request->get('status');
@@ -131,5 +77,24 @@ class TutionfeeController extends Controller
          }
         return response()->json(['status'=>$status]);
         
+    }
+
+    public function update(Request $request, $studentId, $id)
+    {
+        
+        $studentTuitionFee = Tutionfee::find($id)->update([
+
+            'tution_fee' => $request->tution_fee
+        ]);
+
+        $findId = User::where('userId','=',$studentId)->get();
+
+        $change = Onlineadmission::find($findId[0]->onlineadmissions_id)->update([
+
+            'tution_fee' => $request->tution_fee
+        ]);
+
+        return redirect()->route('tutionFee');
+
     }
 }
