@@ -222,16 +222,23 @@ Route::post('/teacher/application/approve/{id}', [TeacherApplicationController::
 
 
 //Tution fee and salary
-
+// Tuition Fees
 Route::get('/tution/fee', [TutionfeeController::class, 'index'])->middleware(['auth:admin', 'verified'])->name('tutionFee');
 Route::post('/tution/fee', [TutionfeeController::class, 'create'])->middleware(['auth:admin', 'verified'])->name('tutionFeeGenerate');
+Route::post('/status/tution', [TutionfeeController::class, 'updateTutionStatus'])->middleware(['auth:admin', 'verified'])->name('updateTutionStatus');
 // Tution Fee Update
 Route::post('/tution/fee/update/{studentId}/{id}', [TutionfeeController::class, 'update'])->middleware(['auth:admin', 'verified'])->name('tution_fee_update');
+// Tution Fee Invoice Print
+Route::get('/tution/fee/print/{id}', [TutionfeeController::class, 'printInvoice'])->middleware(['auth:admin', 'verified']);
 
+// Salary
 Route::get('/teacher/salary', [SalaryController::class, 'index'])->middleware(['auth:admin', 'verified'])->name('teacherSalary');
 Route::post('/teacher/salary', [SalaryController::class, 'create'])->middleware(['auth:admin', 'verified'])->name('teacherSalaryGenerate');
-Route::post('/status/tution', [TutionfeeController::class, 'updateTutionStatus'])->middleware(['auth:admin', 'verified'])->name('updateTutionStatus');
 Route::post('/salary/teacher', [SalaryController::class, 'updateSalaryStatus'])->middleware(['auth:admin', 'verified'])->name('updateSalaryStatus');
+
+// Print Salary Invoice
+Route::get('/salary/teacher/print/{id}', [SalaryController::class, 'printSalaryInvoice'])->middleware(['auth:admin', 'verified']);
+
 Route::get('/account/status',[AccountController::class, 'index'])->middleware(['auth:admin','verified'])->name('accountStatus');
 Route::post('/account/status', [AccountController::class, 'show'])->middleware(['auth:admin', 'verified'])->name('accountStatusPost');
 
@@ -276,6 +283,8 @@ Route::prefix('teacher')->group(function(){
 
     // Teacher -> student attendence
     Route::get('/attendence/{class}/{section}', [StudentAttendenceController::class, 'index'] )->middleware(['auth:teacher', 'verified']);
+    // Teacher -> student attendence all table
+    Route::get('/attendence/all/{class}/{section}', [StudentAttendenceController::class, 'viewAll'] )->middleware(['auth:teacher', 'verified']);
 
     Route::post('/attendence', [StudentAttendenceController::class, 'store'] )->middleware(['auth:teacher', 'verified'])->name('studentAttendence');
 

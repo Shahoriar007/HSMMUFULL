@@ -48,10 +48,16 @@
                                                     $classAttendence = \App\Models\Teacher::where('teacherId','=', Auth::guard('teacher')->user()->teacherId )->get(); 
                                                 @endphp
 
-                                                @if( $classAttendence[0]->classTeacherClass != 0)
+                                                @if( $classAttendence[0]->classTeacherClass != 0 )
                                                 <li class="nk-menu-item">
                                                     <a href="{{url('teacher/attendence')}}/{{$classAttendence[0]->classTeacherClass}}/{{$classAttendence[0]->classTeacherSection}}" class="nk-menu-link">
                                                         <span class="nk-menu-text">Class Attendence</span>
+                                                    </a>
+                                                </li><!-- .nk-menu-item -->
+
+                                                <li class="nk-menu-item">
+                                                    <a href="{{url('teacher/attendence/all')}}/{{$classAttendence[0]->classTeacherClass}}/{{$classAttendence[0]->classTeacherSection}}" class="nk-menu-link">
+                                                        <span class="nk-menu-text">All Class Attendence </span>
                                                     </a>
                                                 </li><!-- .nk-menu-item -->
                                                 @endif

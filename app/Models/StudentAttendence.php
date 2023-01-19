@@ -13,5 +13,7 @@ class StudentAttendence extends Model
         'todayDateAtt',
         'studentId',
         'present',
+        'class',
+        'section',
     ];
 }

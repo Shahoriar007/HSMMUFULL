@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+
 class TutionfeeController extends Controller
 {
     /**
@@ -96,5 +98,24 @@ class TutionfeeController extends Controller
 
         return redirect()->route('tutionFee');
 
+    }
+
+    // Print Tution Fee Invoice
+    public function printInvoice($id)
+    {
+        $invoiceTable = Tutionfee::find($id);
+
+        $invoiceData = array(
+            "id"=>$invoiceTable->id,
+            "studentId"=>$invoiceTable->studentId,
+            "month"=>$invoiceTable->month,
+            "tution_fee"=>$invoiceTable->tution_fee,
+
+        );
+
+        $pdf = Pdf::loadView('admin.adminSection.tutionFeeInvoice', compact('invoiceData'));
+        return $pdf->download();
+
+        
     }
 }

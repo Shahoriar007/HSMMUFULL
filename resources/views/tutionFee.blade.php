@@ -192,7 +192,7 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <a href=""><i class="fas fa-print" aria-hidden="true">Print</i></a>
+                                                    <a href="{{url('/admin/tution/fee/print')}}/{{$tutionFee->id}}"><i class="fas fa-print" aria-hidden="true">Print</i></a>
                                                 </td>
 
 

@@ -45,6 +45,9 @@
 
                                         </tbody>
                                     </table>
+                                    {{$salaries->links()}}
+
+                                    
                                 </div>
                             </div>
                         </div>

@@ -109,7 +109,7 @@
                                                 <th>Month</th>
                                                 <th>Status</th>
                                                 <th class="pro-status">Action</th>
-                                                <th>Pay</th>
+                                                <th>Salary Invoice</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -132,7 +132,7 @@
                                                     
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-success">pay now</button>
+                                                    <a href="{{url('/admin/salary/teacher/print')}}/{{$salary->id}}"><i class="fas fa-print" aria-hidden="true">Print</i></a>
                                                 </td>
 
                                             </tr>
@@ -147,7 +147,7 @@
                                                 <th>Month</th>
                                                 <th>Status</th>
                                                 <th class="pro-status">Action</th>
-                                                <th>Pay</th>
+                                                <th>Salary Invoice</th>
                                         </tfoot>
                                 </div>
                             </div>

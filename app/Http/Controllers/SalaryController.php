@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use App\Models\Salary;
+use App\Models\Teacher;
+
 use App\Models\Teacherapplications;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\Return_;
+
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SalaryController extends Controller
 {
@@ -42,7 +46,7 @@ class SalaryController extends Controller
                 'status' => "pending"
             ]);
         }
-        return redirect()->route('salary');
+        return redirect()->route('teacherSalaryGenerate');
     }
 
     /**
@@ -100,6 +104,7 @@ class SalaryController extends Controller
     {
         //
     }
+
     public function updateSalaryStatus(Request $request){
         $id = $request->get('id');
         $status = $request->get('status');
@@ -123,11 +128,33 @@ class SalaryController extends Controller
         return response()->json(['ji'=>'hiiiiiiiiiiiiiiiiiiii']);
 
     }
+
     public function salary(){
         $id = Auth::guard('teacher')->user()->id;
-        $teacherId = 'tcr'.$id;
-        $salaries = Salary::where('teacherId',$teacherId)->get();
         
+        $teacherId = Teacher::find($id);
+
+        $salaries = Salary::where('teacherId',$teacherId->teacherId)->paginate(10);
+
         return view('salaryView', compact('salaries'));
+    }
+
+    // Print Salary Invoice
+    public function printSalaryInvoice($id){
+
+        $invoiceTable = Salary::find($id);
+
+        $invoiceSalaryData = array(
+            "id"=>$invoiceTable->id,
+            "teacherId"=>$invoiceTable->teacherId,
+            "month"=>$invoiceTable->month,
+            "salary"=>$invoiceTable->salary,
+
+        );
+
+        $pdf = Pdf::loadView('admin.adminSection.salaryInvoice', compact('invoiceSalaryData'));
+        return $pdf->download();
+
+        
     }
 }

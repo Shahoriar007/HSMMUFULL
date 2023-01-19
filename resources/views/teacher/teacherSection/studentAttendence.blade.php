@@ -52,7 +52,7 @@
                                                         @endphp
 
                                                         {{ $studentId[0]->userId }}
-
+                                                        
                                                     </td>
 
                                                    
@@ -63,6 +63,8 @@
                                                         <button class="btn btn-danger stuAtt">A</button>
 
                                                     </td>
+
+                                                   
 
                                                     <td>
                                                         @php
@@ -82,6 +84,15 @@
                                                        
 
                                                     </td>
+
+                                                    <td hidden>
+                                                   {{ $stuAttInfo->admitted_class }}
+                                                   </td>
+
+                                                   <td hidden>
+                                                   {{ $stuAttInfo->admitted_section }}
+                                                   </td>
+
                                                 </form>
                                             </tr>
 
@@ -114,8 +125,10 @@ e.preventDefault();
 var $button = $(this);
 var studentId = $button.parent().prev().html();
 var attendence = $button.html();
+var stuClass = $button.parent().next().next().html();
+var section = $button.parent().next().next().next().html();
 
-console.log(studentId,attendence);
+console.log(studentId,attendence,stuClass,section);
 
 $.ajaxSetup({
     headers: {
@@ -125,7 +138,7 @@ $.ajaxSetup({
 $.ajax({
             type:'POST',
             url:"{{route('studentAttendence')}}",
-            data:{studentId:studentId, attendence:attendence},
+            data:{studentId:studentId, attendence:attendence, stuClass:stuClass, section:section},
             success:function(data){
                 
                 console.log(data.att);
@@ -133,7 +146,6 @@ $.ajax({
                 var newAtt = $button.parent().next().text(data.att);
             }
         });
-
 
 });
 </script>
